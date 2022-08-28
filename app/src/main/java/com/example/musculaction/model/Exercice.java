@@ -1,0 +1,80 @@
+package com.example.musculaction.model;
+
+public class Exercice {
+    private int id;
+    private String title;
+    private int img;
+    private String description;
+    private String details;
+    private String youtubeUrl;
+    private int category;
+
+    public Exercice(int id, String title, int img, String description, String details, String youtubeUrl,int category) {
+        this.id = id;
+        this.title = title;
+        this.img = img;
+        this.description = description;
+        this.details = details;
+        this.youtubeUrl = youtubeUrl;
+        this.category = category;
+    }
+
+    public Exercice() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getImg() {
+        return img;
+    }
+
+    public void setImg(int img) {
+        this.img = img;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getYoutubeUrl() {
+        return youtubeUrl;
+    }
+
+    public void setYoutubeUrl(String youtubeUrl) {
+        this.youtubeUrl = youtubeUrl;
+    }
+}
