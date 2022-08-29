@@ -145,8 +145,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return categoryList;
     }
 
-    //get all exercices from a category
-    public List<Exercice> getAllExercicesOfCategory(int categId){
+    //get all exercises from a category
+    public List<Exercice> getAllExercisesOfCategory(int categId){
         SQLiteDatabase db = this.getReadableDatabase();
         List<Exercice> exercicesList = new ArrayList<>();
 
@@ -172,5 +172,74 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return exercicesList;
+    }
+
+    //Add exercise
+    public void addExercice(Exercice exercice){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        //insert values in content values
+        values.put(KEY_TITLE_EX,exercice.getTitle());
+        values.put(KEY_IMG_EX, exercice.getImg());
+        values.put(KEY_DESC_EX, exercice.getDescription());
+        values.put(KEY_DETAILS_EX, exercice.getDetails());
+        values.put(KEY_YOUTUBE_EX, exercice.getYoutubeUrl());
+        values.put(KEY_EX_CAT, exercice.getCategory());
+
+        //insert data from values into db row
+        db.insert(TABLE_EXERCICES, null,values);
+        Log.d("dbHandler", "addContact: exercice added");
+
+        //closing db connection
+        //db.close();
+    }
+
+    //Get one exercice by id
+    public Exercice getExercice(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_EXERCICES,new String[]{KEY_ID_EX, KEY_TITLE_EX,KEY_IMG_EX,KEY_DESC_EX,KEY_DETAILS_EX,KEY_YOUTUBE_EX,KEY_EX_CAT},
+                KEY_ID_EX +"=?",new String[]{String.valueOf(id)},null,null,null);
+
+        if(cursor != null )
+            cursor.moveToFirst();
+
+        Exercice exercice = new Exercice();
+        //ID
+        //exercice.setId(cursor.getInt(0));
+        exercice.setTitle(cursor.getString(1));
+        exercice.setImg(cursor.getInt(2));
+        exercice.setDescription(cursor.getString(3));
+        exercice.setDetails(cursor.getString(4));
+        exercice.setYoutubeUrl(cursor.getString(5));
+        exercice.setCategory(cursor.getInt(6));
+
+        return exercice;
+    }
+    //UPDATE Exercice
+    public int updateExercice(Exercice exercice){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_TITLE_EX,exercice.getTitle());
+        values.put(KEY_IMG_EX, exercice.getImg());
+        values.put(KEY_DESC_EX, exercice.getDescription());
+        values.put(KEY_DETAILS_EX, exercice.getDetails());
+        values.put(KEY_YOUTUBE_EX, exercice.getYoutubeUrl());
+        values.put(KEY_EX_CAT, exercice.getCategory());
+
+        //update row
+        //update(tabelName, contentValues, where id = 2) //or other number
+        return db.update(TABLE_EXERCICES, values, KEY_ID_EX + "=?",
+                new String[]{String.valueOf(exercice.getId())});
+    }
+
+    //Delete one exercice
+    public void deleteExercice(Exercice exercice){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TABLE_EXERCICES, KEY_ID_EX + "=?",
+                new String[]{String.valueOf(exercice.getId())});
     }
 }
