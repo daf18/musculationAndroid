@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewExercice">
+
+    <ImageView
+        android:id="@+id/addEx_img"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        app:srcCompat="@drawable/gain_muscle"
+        android:contentDescription="muscles" />
+
+    <EditText
+        android:id="@+id/titreEx_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/nom_exercice"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:inputType="textPersonName"
+        android:minHeight="55dp" />
+
+    <EditText
+        android:id="@+id/descEx_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/description"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:inputType="textPersonName"
+        android:minHeight="55dp" />
+
+    <EditText
+        android:id="@+id/detailsEx_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/d_tails"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:inputType="textPersonName"
+        android:minHeight="55dp" />
+
+    <EditText
+        android:id="@+id/youtubeEx_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/youtube_url"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:inputType="textPersonName"
+        android:minHeight="55dp" />
+
+    <Button
+        android:id="@+id/saveEx_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="Sauvgarder"
+        android:height="55dp"/>
+
+</LinearLayout>

@@ -1,6 +1,9 @@
 package com.example.musculaction.model;
 
-public class Exercice {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Exercice implements Parcelable {
     private int id;
     private String title;
     private int img;
@@ -18,9 +21,39 @@ public class Exercice {
         this.youtubeUrl = youtubeUrl;
         this.category = category;
     }
+    public Exercice(String title, int img, String description, String details, String youtubeUrl,int category) {
+        this.title = title;
+        this.img = img;
+        this.description = description;
+        this.details = details;
+        this.youtubeUrl = youtubeUrl;
+        this.category = category;
+    }
 
     public Exercice() {
     }
+
+    protected Exercice(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        img = in.readInt();
+        description = in.readString();
+        details = in.readString();
+        youtubeUrl = in.readString();
+        category = in.readInt();
+    }
+
+    public static final Creator<Exercice> CREATOR = new Creator<Exercice>() {
+        @Override
+        public Exercice createFromParcel(Parcel in) {
+            return new Exercice(in);
+        }
+
+        @Override
+        public Exercice[] newArray(int size) {
+            return new Exercice[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -76,5 +109,21 @@ public class Exercice {
 
     public void setYoutubeUrl(String youtubeUrl) {
         this.youtubeUrl = youtubeUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(title);
+        parcel.writeInt(img);
+        parcel.writeString(description);
+        parcel.writeString(details);
+        parcel.writeString(youtubeUrl);
+        parcel.writeInt(category);
     }
 }

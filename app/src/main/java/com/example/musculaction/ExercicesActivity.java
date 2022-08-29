@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import com.example.musculaction.adapter.RecyclerViewAdapter;
@@ -35,6 +37,13 @@ public class ExercicesActivity extends AppCompatActivity implements RecyclerView
         int idCategory = getIntent().getExtras().getInt("id", 0);
         Log.d("intent", "onCreate: "+ idCategory);
 
+        //get the exercice that was created as new exercice
+       if(getIntent().getExtras().getParcelable("newExercice") != null) {
+            Exercice newExercice = getIntent().getExtras().getParcelable("newExercice");
+            db.addExercice(newExercice);
+        }
+
+
         //get exercises from category
         List<Exercice> exercicesCategory = db.getAllExercisesOfCategory(idCategory);
         Log.d("intent", "onCreate: "+ exercicesCategory.size());
@@ -42,6 +51,15 @@ public class ExercicesActivity extends AppCompatActivity implements RecyclerView
         //Set up adapter
         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(exercicesCategory, getApplicationContext(), this);
         recyclerView.setAdapter(recyclerViewAdapter);
+
+        add_exercice_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewExercice.class);
+                intent.putExtra("idCategory",idCategory);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

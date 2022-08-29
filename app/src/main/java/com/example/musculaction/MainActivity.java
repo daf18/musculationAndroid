@@ -69,9 +69,7 @@ public class MainActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this,
-                        "You cliked: "+categId[i],
-                        Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this,"You cliked: "+categId[i],Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(), ExercicesActivity.class);
                 intent.putExtra("id",categId[i]);

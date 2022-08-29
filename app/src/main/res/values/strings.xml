@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MusculAction</string>
+    <string name="nom_exercice">*Nom de l\'exercice</string>
+    <string name="description">*Description</string>
+    <string name="d_tails">*Détails</string>
+    <string name="youtube_url">YouTube Url</string>
 </resources>
