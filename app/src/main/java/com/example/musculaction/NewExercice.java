@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 public class NewExercice extends AppCompatActivity {
     EditText title, description,details, youtube;
     Button saveExerciceButton;
+    ImageView img;
     Exercice exercice;
     int categoryReceived;
     DatabaseHelper db;
@@ -39,6 +41,7 @@ public class NewExercice extends AppCompatActivity {
         details = findViewById(R.id.detailsEx_et);
         youtube = findViewById(R.id.youtubeEx_et);
         saveExerciceButton = findViewById(R.id.saveEx_btn);
+        img = findViewById(R.id.addEx_img);
         db = new DatabaseHelper(getApplicationContext());
         //pattern for youtube link
         youtubePattern = Pattern.compile("^(http(s)?:\\/\\/)?((w){3}.)?youtu(be|.be)?(\\.com)?\\/.+");
@@ -46,6 +49,8 @@ public class NewExercice extends AppCompatActivity {
         //get current category
         categoryReceived = getIntent().getExtras().getInt("idCategory", 0);
         Log.d("intent", "onCreate: "+ categoryReceived);
+
+
 
         saveExerciceButton.setOnClickListener(view -> {
             if (checkAllFields()){
@@ -60,6 +65,16 @@ public class NewExercice extends AppCompatActivity {
                 finish();
             }
         });
+
+        //exercise to edit and update
+        if(getIntent().getExtras().getParcelable("exerciceEdit") != null){
+            Exercice exerciceEdit = getIntent().getExtras().getParcelable("exerciceEdit");
+            img.setImageResource(exerciceEdit.getImg());
+            title.setText(exerciceEdit.getTitle());
+            description.setText(exerciceEdit.getDescription());
+            details.setText(exerciceEdit.getDetails());
+            youtube.setText(exerciceEdit.getYoutubeUrl());
+        }
     }
     private boolean checkAllFields(){
         String titleText = title.getText().toString();
@@ -94,7 +109,6 @@ public class NewExercice extends AppCompatActivity {
         //Exercice(String title, int img, String description, String details, String youtubeUrl,int category)
         exercice = new Exercice(titleText, R.drawable.gain_muscle,descText, detailsTxt,youtubeTxt,categoryReceived);
 
-        Log.i("produit",exercice.toString());
         // if all required fields are filled , returns true
         return true;
     }

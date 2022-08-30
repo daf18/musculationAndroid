@@ -1,6 +1,8 @@
 package com.example.musculaction.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.musculaction.ExerciceDetails;
+import com.example.musculaction.ExercicesActivity;
 import com.example.musculaction.R;
 import com.example.musculaction.model.Exercice;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private OnExerciceClickListener onExerciceClickListener;
+    private OnExerciceClickListener onExerciceClickListener,onUpdateClickListener,onDeleteClickListener;
     private List<Exercice>  exerciceList;
     private Context context;
 
@@ -70,6 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             //each item view created is atteched to onClickListener
             itemView.setOnClickListener(this);
+
         }
 
         @Override
@@ -80,5 +85,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public interface OnExerciceClickListener {
         void onExerciceClick(int position);
+
     }
 }
